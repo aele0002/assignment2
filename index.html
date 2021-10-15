@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Top population in the world</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+    <link rel="stylesheet" href="DeezFile.css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css">
+    <script src="charts.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fondamento&family=Roboto&display=swap" rel="stylesheet">
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.18.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.18.2"></script>
+    
+
+    <style media="screen">
+      /* Add space between Vega-Embed links  */
+      .vega-actions a {
+        margin-right: 5px;
+      }
+    </style>
+    <style>
+        body{
+            background-color:rgba(147, 153, 247, 0.795)
+        }
+    </style>
+  </head>
+
+
+  <body>
+    <h1 >Population in the world</h1>
+    <h2 class="purple">Population vs land Area</h2>
+    <div id="vis1"></div>
+
+
+    
+    <script>
+      // Assign the specification to a local variable vlSpec.
+      var vlSpec = {
+        
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 500,
+    "height": 400,
+    "title": "population",
+    "data": {
+    "url": "https://raw.githubusercontent.com/aele0002/assignment2/main/population_by_country_2020.csv"
+   },
+    "mark":{"type":"circle","tooltip":true} ,
+    "encoding": {
+    "x": {
+    "field": "LandArea",
+    "type": "quantitative",
+    "title": "Land Area",
+     "axis": {"tickCount": 7},
+    "scale": {"type": "log", "domain": [1, 10000000]}
+   
+    },
+    "y": {
+    "field": "Population",
+    "type": "quantitative"
+    },
+    "color": {
+    "field": "Country",
+    "type": "nominal"
+    },
+    "size": {
+    "field": "Population",
+    "type": "quantitative"
+    }
+    
+}
+      };
+
+      // Embed the visualization in the container with id vis
+      vegaEmbed('#vis1', vlSpec);
+    </script>
+
+    
+   
+          <p> As you can see the highest density in the world is Monaco with the value of 26,337 people /km^3 </p>
+          <p> Monaco has the smallest area in the world with the area of 2 km^2 which is famous for its micro state</p>
+      <h2 class="purple"> Top 5 highest density of population in the world</h2>
+      
+    
+      
+
+
+
+
+
+
+
+      <div id="vis2"></div>
+      <script>
+        // Assign the specification to a local variable vlSpec.
+        var v2Spec = {
+          
+            
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Top 10 highest density countries",
+    "data": {
+        "values": [
+          {"category": "Monaco", "value": 26337},
+          {"category": "Macao", "value": 21645},
+          {"category": "singapore", "value": 8358},
+          {"category": "Hong kong", "value": 3369},
+          {"category": "Gibraltar", "value": 3369}
+          
+        ]
+      },
+    "encoding": {
+      "theta": {"field": "value", "type": "quantitative", "stack": true},
+      "color": {"field": "category", "type": "nominal"}
+    },
+    "layer": [{
+      "mark": {"type": "arc", "outerRadius": 80,"innerRadius":50,"tooltip":true}
+    }, {
+      "mark": {"type": "text", "radius": 90},
+      "encoding": {
+        "text": {"field": "category", "type": "nominal"}
+      }
+    }]
+  }
+      
+  
+        ;
+  
+        // Embed the visualization in the container with id vis
+        vegaEmbed('#vis2', v2Spec);
+      </script>
+
+      <p> China has the highest population and the land Area in the world which exceed more than 1,000,000,000 citizens  </p>
+      <p> The countries bordering China are: Russia, Mongolia, Kazakhstan, Kyrgyzstan, Tajikistan, Afghanistan, Pakistan, India, Bhutan, Nepal, Myanmar (formerly called Burma), Laos, Vietnam and North Korea </p>
+  </body>
+</html>
